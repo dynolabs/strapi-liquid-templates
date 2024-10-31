@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "liquid_base_templates",
+  "info": {
+    "singularName": "liquid-base-template",
+    "pluralName": "liquid-base-templates",
+    "displayName": "Liquid Base Email Templates"
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "referenceId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "bodyHtml": {
+      "type": "text"
+    }
+  }
+}

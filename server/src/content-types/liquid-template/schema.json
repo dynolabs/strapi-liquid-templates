@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "liquid_templates",
+  "info": {
+    "singularName": "liquid-template",
+    "pluralName": "liquid-templates",
+    "displayName": "Liquid Email Templates"
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "referenceId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "bodyHtml": {
+      "type": "text"
+    },
+    "bodyText": {
+      "type": "text"
+    },
+    "sampleData": {
+      "type": "text"
+    },
+    "baseTemplate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::liquid-templates.liquid-base-template"
+    }
+  }
+}
