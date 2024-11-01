@@ -1,8 +1,21 @@
-![Tests](https://github.com/Dulajdeshan/strapi-advanced-uuid/actions/workflows/main.yml/badge.svg)
+<p align="center">
+     <img src="./docs/screenshots/liquid-templates.png" alt="Liquid email templates" width="100">
+</p>
 
-# Strapi Liquid Templates Plugin
+<h1 align="center">
+  Liquid Email Templates for Strapi
+</h1>
 
-The Strapi Liquid Templates Plugin is a custom plugin for Strapi which allows to design and manage your [liquidjs](https://liquidjs.com/index.html) email templates.
+<p align="center">Plugin for design and manage <a href="https://liquidjs.com">liquidjs</a> email templates in <a href="https://strapi.io/" target="_blank">Strapi</a>.</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/strapi-bootstrap-icons">
+    <img src="https://img.shields.io/npm/v/strapi-liquid-templates" alt="Version">
+    <img src="https://img.shields.io/npm/l/strapi-liquid-templates" alt="License">
+  </a>
+</p>
+
+The Strapi Liquid Templates Plugin is a custom plugin for Strapi which allows to design and manage your [liquidjs](https://liquidjs.com) email templates.
 
 ## Installation
 
@@ -91,4 +104,4 @@ Request a password reset for a user which was created under User collection type
 
 ## License
 
-This plugin is licensed under the MIT License. See the LICENSE file for more information.
+This plugin is licensed under the MIT License. See the [LICENSE](./LICENSE.md) file for more information.
