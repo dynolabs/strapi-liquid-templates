@@ -1,27 +1,29 @@
-import { Main, Tabs, useNotifyAT, Loader } from '@strapi/design-system';
-import {
-  BackButton,
-  Layouts,
-  useFetchClient,
-  useNotification,
-} from '@strapi/strapi/admin';
-import { Flex } from '@strapi/design-system';
-import { Button } from '@strapi/design-system';
-import { getMessage } from '../utils/getMessage';
-import { Pencil, Plus } from '@strapi/icons';
-import { useNavigate } from 'react-router-dom';
-import { PLUGIN_ID } from '../pluginId';
-import { Table } from '@strapi/design-system';
-import { Thead } from '@strapi/design-system';
-import { Th } from '@strapi/design-system';
-import { Tr } from '@strapi/design-system';
-import { Typography } from '@strapi/design-system';
-import { Tbody } from '@strapi/design-system';
-import { Td } from '@strapi/design-system';
-import { IconButton } from '@strapi/design-system';
-import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+
+import {
+  Button,
+  Flex,
+  IconButton,
+  Loader,
+  Main,
+  Table,
+  Tabs,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Typography,
+  useNotifyAT,
+} from '@strapi/design-system';
+import { Pencil, Plus } from '@strapi/icons';
+import { BackButton, Layouts, useFetchClient, useNotification } from '@strapi/strapi/admin';
+
 import { SideNavBar } from '../components/SideNavBar';
+import { PLUGIN_ID } from '../pluginId';
+import { getMessage } from '../utils/getMessage';
 
 type TEmailTemplate = {
   id: number;
@@ -112,55 +114,60 @@ const HomePage = () => {
               </Tabs.List>
 
               <Tabs.Content value="custom">
-                {isLoadingTemplates ? <Loader /> : (
+                {isLoadingTemplates ? (
+                  <Loader />
+                ) : (
                   <Table colCount={emailTemplatesHeaders.length}>
-                  <Thead>
-                    <Tr>
-                      {emailTemplatesHeaders.map((header) => (
-                        <Th key={header.value}>
-                          <Typography variant="sigma">{header.name}</Typography>
+                    <Thead>
+                      <Tr>
+                        {emailTemplatesHeaders.map((header) => (
+                          <Th key={header.value}>
+                            <Typography variant="sigma">{header.name}</Typography>
+                          </Th>
+                        ))}
+                        <Th>
+                          <Typography variant="sigma">{getMessage('table.actions')}</Typography>
                         </Th>
-                      ))}
-                      <Th>
-                        <Typography variant="sigma">{getMessage('table.actions')}</Typography>
-                      </Th>
-                    </Tr>
-                  </Thead>
-
-                  <Tbody>
-                    {emailTemplates?.map((emailTemplate, index) => (
-                      <Tr key={emailTemplate.id}>
-                        <Td>
-                          <Typography textColor="neutral800">{emailTemplate.name}</Typography>
-                        </Td>
-                        <Td>
-                          <Typography textColor="neutral800">
-                            {emailTemplate.referenceId}
-                          </Typography>
-                        </Td>
-                        <Td>
-                          <Typography textColor="neutral800">{emailTemplate.enabled}</Typography>
-                        </Td>
-                        <Td>
-                          <Typography textColor="neutral800">
-                            {formatDate(new Date(emailTemplate.createdAt),  { dateStyle: 'full', timeStyle: 'short' })}
-                          </Typography>
-                        </Td>
-                        <Td>
-                          <Flex>
-                            <IconButton
-                              label={getMessage('tooltip.edit')}
-                              onClick={() => navigate(getUrl(`design/${emailTemplate.id}`))}
-                              noBorder
-                            >
-                              <Pencil />
-                            </IconButton>
-                          </Flex>
-                        </Td>
                       </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
+                    </Thead>
+
+                    <Tbody>
+                      {emailTemplates?.map((emailTemplate, index) => (
+                        <Tr key={emailTemplate.id}>
+                          <Td>
+                            <Typography textColor="neutral800">{emailTemplate.name}</Typography>
+                          </Td>
+                          <Td>
+                            <Typography textColor="neutral800">
+                              {emailTemplate.referenceId}
+                            </Typography>
+                          </Td>
+                          <Td>
+                            <Typography textColor="neutral800">{emailTemplate.enabled}</Typography>
+                          </Td>
+                          <Td>
+                            <Typography textColor="neutral800">
+                              {formatDate(new Date(emailTemplate.createdAt), {
+                                dateStyle: 'full',
+                                timeStyle: 'short',
+                              })}
+                            </Typography>
+                          </Td>
+                          <Td>
+                            <Flex>
+                              <IconButton
+                                label={getMessage('tooltip.edit')}
+                                onClick={() => navigate(getUrl(`design/${emailTemplate.id}`))}
+                                noBorder
+                              >
+                                <Pencil />
+                              </IconButton>
+                            </Flex>
+                          </Td>
+                        </Tr>
+                      ))}
+                    </Tbody>
+                  </Table>
                 )}
               </Tabs.Content>
 

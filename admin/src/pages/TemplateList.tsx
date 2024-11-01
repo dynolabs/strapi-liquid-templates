@@ -1,37 +1,39 @@
+import { useState } from 'react';
+import { useIntl } from 'react-intl';
+import { useMutation, useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import {
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Typography,
-  Tbody,
-  Td,
+  Button,
+  Dialog,
   Flex,
   IconButton,
   Loader,
-  useNotifyAT,
   Main,
-  Button,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Typography,
+  useNotifyAT,
+  VisuallyHidden,
 } from '@strapi/design-system';
 import { Pencil, Plus, Trash } from '@strapi/icons';
-import { useNavigate, useParams } from 'react-router-dom';
 import {
-  useFetchClient,
-  useNotification,
-  Layouts,
   BackButton,
   ConfirmDialog,
   FetchError,
+  Layouts,
   useAPIErrorHandler,
+  useFetchClient,
+  useNotification,
 } from '@strapi/strapi/admin';
-import { useIntl } from 'react-intl';
-import { useMutation, useQuery } from 'react-query';
-import { PLUGIN_ID } from '../pluginId';
+
 import { SideNavBar } from '../components/SideNavBar';
+import { PLUGIN_ID } from '../pluginId';
 import { getTranslation } from '../utils/getTranslation';
-import { VisuallyHidden } from '@strapi/design-system';
-import { Dialog } from '@strapi/design-system';
-import { useState } from 'react';
 
 type TEmailTemplate = {
   id: number;

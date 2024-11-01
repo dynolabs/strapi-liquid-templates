@@ -1,13 +1,11 @@
-import { SubNavHeader } from '@strapi/design-system';
-import { SubNavLink } from '@strapi/design-system';
-import { SubNavSection } from '@strapi/design-system';
-import { SubNavSections } from '@strapi/design-system';
-import { SubNav } from '@strapi/design-system';
-import { Box } from '@strapi/design-system';
-import { GridNine, WarningCircle } from '@strapi/icons';
-import { getMessage } from '../utils/getMessage';
-import { NavLink } from 'react-router-dom';
-import { PLUGIN_ID } from '../pluginId';
+import { NavLink } from "react-router-dom";
+
+import {
+    SubNav, SubNavHeader, SubNavLink, SubNavSection, SubNavSections
+} from "@strapi/design-system";
+
+import { PLUGIN_ID } from "../../pluginId";
+import { getMessage } from "../../utils/getMessage";
 
 const SideNavBar = () => {
   const LINKS = [

@@ -1,5 +1,5 @@
-import { Box } from '@strapi/design-system';
-import { Page as StrapiPage } from '@strapi/strapi/admin';
+import { Box } from "@strapi/design-system";
+import { Page as StrapiPage } from "@strapi/strapi/admin";
 
 const Error = ({ statusCode }: { statusCode: number }) => {
   switch (statusCode) {

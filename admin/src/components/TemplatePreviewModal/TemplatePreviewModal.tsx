@@ -1,13 +1,12 @@
-import { Button, Modal, Field } from '@strapi/design-system';
-import { getMessage } from '../utils/getMessage';
-import styled from 'styled-components';
-import { DeviceFrameset, DeviceEmulator } from 'react-device-frameset';
-import 'react-device-frameset/styles/marvel-devices.min.css';
-import 'react-device-frameset/styles/device-emulator.min.css';
-import React from 'react';
-import { Tabs } from '@strapi/design-system';
-import { IconButton } from '@strapi/design-system';
-import { Flex } from '@strapi/design-system';
+import "react-device-frameset/styles/marvel-devices.min.css";
+import "react-device-frameset/styles/device-emulator.min.css";
+
+import { DeviceFrameset } from "react-device-frameset";
+import styled from "styled-components";
+
+import { Button, Flex, Modal, Tabs } from "@strapi/design-system";
+
+import { getMessage } from "../../utils/getMessage";
 
 const ModalContent = styled(Modal.Content)`
   max-width: inherit;

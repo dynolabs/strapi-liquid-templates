@@ -1,37 +1,29 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Typography,
-  Tbody,
-  Td,
   Flex,
   IconButton,
-  Loader,
-  useNotifyAT,
   Main,
-  Button,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Typography,
+  VisuallyHidden,
 } from '@strapi/design-system';
-import { Pencil, Plus } from '@strapi/icons';
-import { getMessage } from '../utils/getMessage';
-import { useNavigate } from 'react-router-dom';
-import { useFetchClient, useNotification, Layouts, BackButton } from '@strapi/strapi/admin';
-import { useIntl } from 'react-intl';
-import { useQuery } from 'react-query';
-import { PLUGIN_ID } from '../pluginId';
+import { Pencil } from '@strapi/icons';
+import { BackButton, Layouts } from '@strapi/strapi/admin';
+
 import { SideNavBar } from '../components/SideNavBar';
-import { VisuallyHidden } from '@strapi/design-system';
+import { PLUGIN_ID } from '../pluginId';
+import { getMessage } from '../utils/getMessage';
 
 const getUrl = (to: string) => (to ? `/plugins/${PLUGIN_ID}/${to}` : `/plugins/${PLUGIN_ID}`);
 
 const CoreTemplateList = () => {
   const navigate = useNavigate();
-  const { del, get } = useFetchClient();
-  const { toggleNotification } = useNotification();
-  const { formatDate } = useIntl();
-
-  const { notifyStatus } = useNotifyAT();
 
   const tableHeaders = [{ name: getMessage('table.name'), value: 'name' }];
 
@@ -67,9 +59,7 @@ const CoreTemplateList = () => {
                   </Th>
                 ))}
                 <Th>
-                  <VisuallyHidden>
-                    {getMessage('table.actions')}
-                  </VisuallyHidden>
+                  <VisuallyHidden>{getMessage('table.actions')}</VisuallyHidden>
                 </Th>
               </Tr>
             </Thead>

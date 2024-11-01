@@ -1,18 +1,28 @@
+import { Form, Formik } from 'formik';
 import { ChangeEvent, useState } from 'react';
+import { PrimitiveType, useIntl } from 'react-intl';
+import { useMutation, useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
 import {
-  Main,
-  Flex,
-  Box,
-  IconButton,
-  Textarea,
-  Field,
-  TextInput,
-  Button,
-  SingleSelect,
-  SingleSelectOption,
   Alert,
   Badge,
+  Box,
+  Button,
+  Field,
+  Flex,
+  IconButton,
+  JSONInput,
+  Main,
+  SingleSelect,
+  SingleSelectOption,
+  Textarea,
+  TextInput,
+  Typography,
+  VisuallyHidden,
 } from '@strapi/design-system';
+import { Check, Expand } from '@strapi/icons';
 import {
   BackButton,
   FetchError,
@@ -21,20 +31,12 @@ import {
   useFetchClient,
   useNotification,
 } from '@strapi/strapi/admin';
-import { Params, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { Formik, Form } from 'formik';
-import { Check, Expand } from '@strapi/icons';
-import { PrimitiveType, useIntl } from 'react-intl';
-import { useMutation, useQuery } from 'react-query';
-import { liquidTemplateSchema } from '../utils/schema';
-import { PLUGIN_ID } from '../pluginId';
-import { TemplatePreviewModal } from '../components/TemplatePreviewModal';
-import { getTranslation } from '../utils/getTranslation';
+
 import { Page } from '../components/Page';
-import { VisuallyHidden } from '@strapi/design-system';
-import { JSONInput } from '@strapi/design-system';
-import { Typography } from '@strapi/design-system';
+import { TemplatePreviewModal } from '../components/TemplatePreviewModal';
+import { PLUGIN_ID } from '../pluginId';
+import { getTranslation } from '../utils/getTranslation';
+import { liquidTemplateSchema } from '../utils/schema';
 
 const TemplateBodyField = styled(Field.Root)`
   & > div {
