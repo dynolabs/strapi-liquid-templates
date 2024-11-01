@@ -16,12 +16,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-      - name: Install dependencies
-        run: yarn install
       - name: Intall npm-install-peers globally
         run: yarn global add npm-install-peers
       - name: Install peer dependencies
         run: npm-install-peers
+      - name: Install dependencies
+        run: yarn install
       - name: Building package
         run: yarn build
       - name: Install semantic-release
