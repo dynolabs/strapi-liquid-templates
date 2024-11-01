@@ -1,6 +1,12 @@
 {
   "version": "0.0.0",
-  "keywords": [],
+  "keywords": [
+    "strapi",
+    "strapi plugin",
+    "email",
+    "liquidjs",
+    "email templates"
+  ],
   "type": "commonjs",
   "name": "strapi-liquid-templates",
   "description": "Design and manage your liquid email templates",

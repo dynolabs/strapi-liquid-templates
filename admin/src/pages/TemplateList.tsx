@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useMutation, useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import {
   Button,
@@ -17,7 +17,6 @@ import {
   Thead,
   Tr,
   Typography,
-  useNotifyAT,
   VisuallyHidden,
 } from '@strapi/design-system';
 import { Pencil, Plus, Trash } from '@strapi/icons';
@@ -34,6 +33,8 @@ import {
 import { SideNavBar } from '../components/SideNavBar';
 import { PLUGIN_ID } from '../pluginId';
 import { getTranslation } from '../utils/getTranslation';
+import { EmptyStateLayout } from '@strapi/design-system';
+import { EmptyDocuments } from '@strapi/icons/symbols';
 
 type TEmailTemplate = {
   id: number;
@@ -74,8 +75,6 @@ const TemplateList = () => {
   const { formatAPIError } = useAPIErrorHandler();
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [templateToDelete, setTemplateToDelete] = useState<number | null>(null);
-
-  const { notifyStatus } = useNotifyAT();
 
   const { type } = useParams();
 
@@ -149,6 +148,9 @@ const TemplateList = () => {
     }
   };
 
+  // Derrived values
+  const isEmpty = emailTemplates?.length === 0;
+
   if (isLoading) {
     return <Loader />;
   }
@@ -183,43 +185,68 @@ const TemplateList = () => {
             </Thead>
 
             <Tbody>
-              {emailTemplates?.map((emailTemplate, index) => (
-                <Tr key={emailTemplate.id}>
-                  <Td>
-                    <Typography textColor="neutral800">{emailTemplate.name}</Typography>
-                  </Td>
-                  <Td>
-                    <Typography textColor="neutral800">{emailTemplate.referenceId}</Typography>
-                  </Td>
-                  <Td>
-                    <Typography textColor="neutral800">
-                      {formatDate(new Date(emailTemplate.createdAt), {
-                        dateStyle: 'full',
-                        timeStyle: 'short',
-                      })}
-                    </Typography>
-                  </Td>
-                  <Td>
-                    <Flex justifyContent="end">
-                      <IconButton
-                        label={getMessage('label.edit')}
-                        onClick={() => navigate(getUrl(`templates/${type}/${emailTemplate.id}`))}
-                        variant="ghost"
-                      >
-                        <Pencil />
-                      </IconButton>
-
-                      <IconButton
-                        label={getMessage('label.delete')}
-                        onClick={() => handleShowConfirmDelete(emailTemplate.id)}
-                        variant="ghost"
-                      >
-                        <Trash />
-                      </IconButton>
-                    </Flex>
+              {isEmpty ? (
+                <Tr>
+                  <Td colSpan={emailTemplatesHeaders.length + 1}>
+                    <EmptyStateLayout
+                      content={getMessage('label.noTemplates')}
+                      hasRadius
+                      shadow={false}
+                      icon={<EmptyDocuments width="16rem" />}
+                      action={
+                        <Button
+                          tag={Link}
+                          startIcon={<Plus />}
+                          style={{ textDecoration: 'none' }}
+                          to={getUrl(`templates/${type}/new`)}
+                          minWidth="max-content"
+                          marginLeft={2}
+                        >
+                          {getMessage('label.newTemplate')}
+                        </Button>
+                      }
+                    />
                   </Td>
                 </Tr>
-              ))}
+              ) : (
+                emailTemplates?.map((emailTemplate) => (
+                  <Tr key={emailTemplate.id}>
+                    <Td>
+                      <Typography textColor="neutral800">{emailTemplate.name}</Typography>
+                    </Td>
+                    <Td>
+                      <Typography textColor="neutral800">{emailTemplate.referenceId}</Typography>
+                    </Td>
+                    <Td>
+                      <Typography textColor="neutral800">
+                        {formatDate(new Date(emailTemplate.createdAt), {
+                          dateStyle: 'full',
+                          timeStyle: 'short',
+                        })}
+                      </Typography>
+                    </Td>
+                    <Td>
+                      <Flex justifyContent="end">
+                        <IconButton
+                          label={getMessage('label.edit')}
+                          onClick={() => navigate(getUrl(`templates/${type}/${emailTemplate.id}`))}
+                          variant="ghost"
+                        >
+                          <Pencil />
+                        </IconButton>
+
+                        <IconButton
+                          label={getMessage('label.delete')}
+                          onClick={() => handleShowConfirmDelete(emailTemplate.id)}
+                          variant="ghost"
+                        >
+                          <Trash />
+                        </IconButton>
+                      </Flex>
+                    </Td>
+                  </Tr>
+                ))
+              )}
             </Tbody>
           </Table>
         </Layouts.Content>

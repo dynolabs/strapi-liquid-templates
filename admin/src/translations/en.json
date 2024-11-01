@@ -36,6 +36,7 @@
     "label.editCustomTemplate": "Edit custom template",
     "label.newTemplate": "New Template",
     "label.save": "Save",
+    "label.noTemplates": "No templates",
     "label.templateCreated": "Template created",
     "label.templateDeleted": "Template deleted",
     "label.templatePreview": "Template Preview",
