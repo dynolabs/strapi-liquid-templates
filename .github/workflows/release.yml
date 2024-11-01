@@ -21,7 +21,7 @@ jobs:
       - name: Intall npm-install-peers globally
         run: yarn global add npm-install-peers
       - name: Install peer dependencies
-        run: yarn npm-install-peers
+        run: npm-install-peers
       - name: Building package
         run: yarn build
       - name: Install semantic-release
