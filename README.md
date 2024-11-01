@@ -102,6 +102,70 @@ Once you're done with it, press on `Save` to save your core template.
 
 Request a password reset for a user which was created under User collection type.
 
+## Send Emails Programmatically
+
+You can send emails programmatically by using the `Strapi Liquid Templates` plugin. Here is an example of how to send an email:
+
+```typescript
+// import type { Core } from '@strapi/strapi';
+
+export default {
+  /**
+   * An asynchronous register function that runs before
+   * your application is initialized.
+   *
+   * This gives you an opportunity to extend code.
+   */
+  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+
+  /**
+   * An asynchronous bootstrap function that runs before
+   * your application gets started.
+   *
+   * This gives you an opportunity to set up your data model,
+   * run jobs, or perform some special logic.
+   */
+  async bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {
+    try {
+      await strapi
+        .plugin('liquid-templates')
+        .service('email')
+        .sendLiquidEmail(
+          {
+            // required
+            // This can also be an array of email addresses
+            to: 'to@example.com',
+            // Optional
+            cc: ['cc-one@example.com', 'cc-two@example.com'],
+            // Optional
+            bcc: ['bcc@example.com'],
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: 'from@example.com',
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: 'reply@example.com',
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Reference Id defined in the custom template (won't change on import)
+            referenceId: 'account-approved',
+            // If provided here will override the template's subject.
+            // Variables can be included as `Congratulations {{ USER.firstName }}! Your Account has been approved!`
+            subject: `Account Approved`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            USER: { firstName: 'John', lastName: 'Doe' },
+          }
+        );
+      strapi.log.info('Email sent');
+    } catch (error) {
+      strapi.log.error(error);
+    }
+  },
+};
+```
+
 ## License
 
 This plugin is licensed under the MIT License. See the [LICENSE](./LICENSE.md) file for more information.
