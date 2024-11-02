@@ -19,7 +19,7 @@
     "url": "https://github.com/dulajdeshan"
   },
   "repository": {
-    "url": "https://github.com/Dulajdeshan/strapi-liquid-templates",
+    "url": "git+https://github.com/Dulajdeshan/strapi-liquid-templates.git",
     "type": "git",
     "directory": "."
   },
