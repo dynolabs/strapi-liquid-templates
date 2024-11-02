@@ -17,7 +17,7 @@
 
 The Strapi Liquid Templates Plugin is a custom plugin for Strapi which allows to design and manage your [liquidjs](https://liquidjs.com) email templates.
 
-## Installation
+## ⚙️ Installation
 
 To install the The Strapi Liquid Templates Plugin, simply run one of the following command:
 
@@ -29,7 +29,7 @@ npm install strapi-liquid-templates
 yarn add strapi-liquid-templates
 ```
 
-## Usage
+## ⚡️ Usage
 
 ### Template Types
 
@@ -166,6 +166,13 @@ export default {
 };
 ```
 
-## License
+## 👍 Contribute
+
+If you want to say **Thank You** and/or support the active development of `Fiber`:
+
+1. Add a [GitHub Star](https://github.com/Dulajdeshan/strapi-liquid-templates/stargazers) to the project.
+2. Support the project by donating a [cup of coffee](https://buymeacoff.ee/dulajdeshan).
+
+## 🧾 License
 
 This plugin is licensed under the MIT License. See the [LICENSE](./LICENSE.md) file for more information.
