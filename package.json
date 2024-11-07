@@ -11,20 +11,20 @@
   "name": "strapi-liquid-templates",
   "description": "Design and manage your liquid email templates",
   "license": "MIT",
-  "homepage": "https://github.com/Dulajdeshan/strapi-liquid-templates",
-  "readme": "https://github.com/Dulajdeshan/strapi-liquid-templates#readme",
+  "homepage": "https://github.com/dynolabs/strapi-liquid-templates",
+  "readme": "https://github.com/dynolabs/strapi-liquid-templates#readme",
   "author": {
     "name": "Dulaj Ariyaratne",
     "email": "dulajdeshans@gmail.com",
     "url": "https://github.com/dulajdeshan"
   },
   "repository": {
-    "url": "git+https://github.com/Dulajdeshan/strapi-liquid-templates.git",
+    "url": "git+https://github.com/dynolabs/strapi-liquid-templates.git",
     "type": "git",
     "directory": "."
   },
   "bugs": {
-    "url": "https://github.com/Dulajdeshan/strapi-liquid-templates/issues",
+    "url": "https://github.com/dynolabs/strapi-liquid-templates/issues",
     "email": "dulajdeshans@gmail.com"
   },
   "exports": {
@@ -101,10 +101,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "release": {
-    "branches": [
-      "latest"
-    ]
   }
 }
