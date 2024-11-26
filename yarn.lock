@@ -2166,9 +2166,9 @@
     react-remove-scroll "2.5.10"
 
 "@strapi/design-system@^2.0.0-rc.11":
-  version "2.0.0-rc.13"
-  resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-2.0.0-rc.13.tgz#2ecde58b4f01d4b982a974ffd2d12e852190142d"
-  integrity sha512-C0Br9VH06rnx4MzUU/knWaglRuzEjl9I/5dI4lrplPnVaOqHgr7fnOi0SOfojJRfzPLclwTO2pislU4z22O35w==
+  version "2.0.0-rc.14"
+  resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-2.0.0-rc.14.tgz#7478f50b3740311a3df3b929f410699b039cf5ef"
+  integrity sha512-zOtArGfAQmKO5qqRE0IlONfjR1JL2VL/KjV3hE++KSybOZgfhbdckN4svpNtJ6i2Pv+glm7nHdu9h6AHRBuujQ==
   dependencies:
     "@codemirror/lang-json" "6.0.1"
     "@floating-ui/react-dom" "2.1.0"
@@ -2189,7 +2189,7 @@
     "@radix-ui/react-switch" "1.0.3"
     "@radix-ui/react-tabs" "1.0.4"
     "@radix-ui/react-tooltip" "1.0.7"
-    "@strapi/ui-primitives" "2.0.0-rc.13"
+    "@strapi/ui-primitives" "2.0.0-rc.14"
     "@uiw/react-codemirror" "4.22.2"
     react-remove-scroll "2.5.10"
 
@@ -2500,10 +2500,10 @@
     aria-hidden "1.2.4"
     react-remove-scroll "2.5.10"
 
-"@strapi/ui-primitives@2.0.0-rc.13":
-  version "2.0.0-rc.13"
-  resolved "https://registry.yarnpkg.com/@strapi/ui-primitives/-/ui-primitives-2.0.0-rc.13.tgz#1deebe31a26b4419ce65506413bd25463653e3c6"
-  integrity sha512-yOkuC7ci5MZcdMDGWlq4tZbvx4sJmxiSYmIQpDV1P5jCerGzDpn5l/b3JS4bqixvSN2ZdeUsKYraaSRzUTtFdQ==
+"@strapi/ui-primitives@2.0.0-rc.14":
+  version "2.0.0-rc.14"
+  resolved "https://registry.yarnpkg.com/@strapi/ui-primitives/-/ui-primitives-2.0.0-rc.14.tgz#b09a93ef9a69971886f87cbed076d735af6f4909"
+  integrity sha512-lCl370AKFJXjEJmZHW9r8m8gXwgQs+K2WqND2sykL3+1VNjawDhThnRtYqYxheCf10vW8aS0Zd1CduLZ6EoEjg==
   dependencies:
     "@radix-ui/number" "1.0.1"
     "@radix-ui/primitive" "1.0.1"
