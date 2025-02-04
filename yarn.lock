@@ -2237,10 +2237,15 @@
     react-redux "8.1.3"
     yup "0.32.9"
 
-"@strapi/icons@2.0.0-rc.12", "@strapi/icons@^2.0.0-rc.11":
+"@strapi/icons@2.0.0-rc.12":
   version "2.0.0-rc.12"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-2.0.0-rc.12.tgz#a8d268bbf3d628b466b102877a5355113024bac6"
   integrity sha512-Qt5WQ9fjS1Xh7F8Elrlf3ACJGwCjogZ7xFHl/xZNUgAueZb7OYsVL6Aclr/xAJe8cJP5ohpB0c6FI3JoyjcnHQ==
+
+"@strapi/icons@^2.0.0-rc.11":
+  version "2.0.0-rc.16"
+  resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-2.0.0-rc.16.tgz#92c359b70df7dacd87dc82823ae89a4b790ffb36"
+  integrity sha512-CY9pA8PFvGmzG/V30DFxmPCWOGUAyHy2liUadaHt7BQpnGdoaOJBnnrt6/STylRQAZpVJrHD1RE7r2xfwPpUAg==
 
 "@strapi/logger@5.4.1":
   version "5.4.1"
