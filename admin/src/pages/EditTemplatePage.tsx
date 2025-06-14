@@ -51,7 +51,6 @@ const ExpandButton = styled(IconButton)`
 `;
 
 const Iframe = styled.iframe`
-  color: ${({ theme }) => theme.colors.neutral400};
   border: none;
 `;
 
