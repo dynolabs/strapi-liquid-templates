@@ -253,7 +253,9 @@ const TemplateList = () => {
       </Layouts.Root>
 
       <Dialog.Root open={showConfirmDelete} onOpenChange={handleShowConfirmDelete}>
-        <ConfirmDialog onConfirm={handleConfirmDelete} variant={undefined} icon={undefined} />
+        <Dialog.Content>
+          <ConfirmDialog onConfirm={handleConfirmDelete} variant={undefined} icon={undefined} />
+        </Dialog.Content>
       </Dialog.Root>
     </Main>
   );

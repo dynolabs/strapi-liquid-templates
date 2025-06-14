@@ -48,7 +48,6 @@ const ExpandButton = styled(IconButton)`
 `;
 
 const Iframe = styled.iframe`
-  color: ${({ theme }) => theme.colors.neutral400};
   border: none;
 `;
 
@@ -56,7 +55,6 @@ const getBaseTemplate = (
   baseTemplates: { id: number; referenceId: string; bodyHtml: string }[],
   selectedBaseTemplate: number
 ) => {
-  console.log(selectedBaseTemplate, baseTemplates);
   return baseTemplates?.find((baseTemplate) => baseTemplate.id === selectedBaseTemplate);
 };
 
@@ -204,7 +202,6 @@ const CreateTemplatePage = () => {
         {({ handleSubmit, values, handleChange, errors, validateField }: any) => {
           const baseTemplate = getBaseTemplate(baseTemplates, values.baseTemplate);
 
-          console.log(baseTemplate);
           // Avoid a race condition to allow each field to be validated on change
           const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
@@ -364,7 +361,7 @@ const CreateTemplatePage = () => {
                         <Box
                           flex="1"
                           borderColor="neutral200"
-                          background="neutral800"
+                          background="white"
                           position="relative"
                         >
                           <ExpandButton
