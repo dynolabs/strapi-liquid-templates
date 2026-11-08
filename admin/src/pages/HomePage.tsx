@@ -76,7 +76,7 @@ const HomePage = () => {
 
   const fetchTemplates = async (): Promise<TEmailTemplate[]> => {
     try {
-      const { data } = await get(`${PLUGIN_ID}`);
+      const { data } = await get<TEmailTemplate[]>(`${PLUGIN_ID}`);
       notifyStatus('The roles have loaded successfully');
 
       return data;
@@ -117,7 +117,10 @@ const HomePage = () => {
                 {isLoadingTemplates ? (
                   <Loader />
                 ) : (
-                  <Table colCount={emailTemplatesHeaders.length}>
+                  <Table
+                    colCount={emailTemplatesHeaders.length}
+                    rowCount={(emailTemplates?.length ?? 0) + 1}
+                  >
                     <Thead>
                       <Tr>
                         {emailTemplatesHeaders.map((header) => (
@@ -158,7 +161,7 @@ const HomePage = () => {
                               <IconButton
                                 label={getMessage('tooltip.edit')}
                                 onClick={() => navigate(getUrl(`design/${emailTemplate.id}`))}
-                                noBorder
+                                variant="ghost"
                               >
                                 <Pencil />
                               </IconButton>
@@ -172,7 +175,7 @@ const HomePage = () => {
               </Tabs.Content>
 
               <Tabs.Content value="core">
-                <Table colCount={coreTemplatesHeaders.length}>
+                <Table colCount={coreTemplatesHeaders.length} rowCount={coreEmailTypes.length + 1}>
                   <Thead>
                     <Tr>
                       {coreTemplatesHeaders.map((header) => (
@@ -199,7 +202,7 @@ const HomePage = () => {
                               onClick={() =>
                                 navigate(getUrl(`design/core/${coreEmailType.coreEmailType}`))
                               }
-                              noBorder
+                              variant="ghost"
                             >
                               <Pencil />
                             </IconButton>
