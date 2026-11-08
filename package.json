@@ -27,7 +27,7 @@
     "email": "dulajdeshans@gmail.com"
   },
   "engines": {
-    "node": ">=18.0.0 <=22.x.x",
+    "node": ">=18.0.0 <=26.x.x",
     "npm": ">=6.0.0"
   },
   "exports": {
