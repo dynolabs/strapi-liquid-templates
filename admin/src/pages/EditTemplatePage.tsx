@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, ComponentProps, useState } from 'react';
 import { PrimitiveType, useIntl } from 'react-intl';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -80,8 +80,25 @@ const getPageTitleId = (type?: string) => {
   }
 };
 
+type TBaseTemplate = { id: number; referenceId: string; bodyHtml: string };
+
+type TTemplate = {
+  referenceId?: string;
+  name?: string;
+  subject?: string;
+  bodyHtml?: string;
+  sampleData?: string;
+  baseTemplate?: TBaseTemplate | null;
+};
+
+// Badge is typed as a div but forwards `tag` to Flex. Alert renders its children inside a
+// <p>, so these badges have to stay spans for the markup to be valid.
+const SpanBadge = Badge as unknown as (
+  props: Omit<ComponentProps<typeof Badge>, 'tag'> & { tag: 'span' }
+) => ReturnType<typeof Badge>;
+
 const getBaseTemplate = (
-  baseTemplates: { id: number; referenceId: string; bodyHtml: string }[],
+  baseTemplates: TBaseTemplate[] | undefined,
   selectedBaseTemplate: number
 ) => {
   return baseTemplates?.find((baseTemplate) => baseTemplate.id === selectedBaseTemplate);
@@ -128,13 +145,13 @@ const EditTemplatePage = () => {
   const fetchTemplate = async () => {
     const url = getFetchUrl(templateId, type);
 
-    const { data } = await get(url);
+    const { data } = await get<TTemplate>(url);
 
     return data;
   };
 
   const fetchBaseTemplates = async () => {
-    const { data } = await get(`${PLUGIN_ID}/base-templates`);
+    const { data } = await get<TBaseTemplate[]>(`${PLUGIN_ID}/base-templates`);
 
     return data;
   };
@@ -154,7 +171,7 @@ const EditTemplatePage = () => {
     sampleData: string;
     baseTemplate: { bodyHtml: string; referenceId: string };
   }) => {
-    return post(`${PLUGIN_ID}/html`, {
+    return post<{ html: string }>(`${PLUGIN_ID}/html`, {
       template: data,
       sampleData,
       baseTemplate: baseTemplate,
@@ -250,9 +267,9 @@ const EditTemplatePage = () => {
     sampleData,
     baseTemplate,
   }: {
-    data: string;
-    sampleData: string;
-    baseTemplate?: { bodyHtml: string; referenceId: string };
+    data?: string;
+    sampleData?: string;
+    baseTemplate?: { bodyHtml: string; referenceId: string } | null;
   }) => {
     if (data) {
       await mutationHtmlPreview.mutate({
@@ -296,7 +313,9 @@ const EditTemplatePage = () => {
           const baseTemplate = getBaseTemplate(baseTemplates, values.baseTemplate);
 
           // Avoid a race condition to allow each field to be validated on change
-          const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+          const handleInputChange = async (
+            e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+          ) => {
             await handleChange(e);
             validateField(e.target.name);
           };
@@ -337,9 +356,9 @@ const EditTemplatePage = () => {
                         {CORE_TEMPLATE_VARIABLES[templateId] && (
                           <Flex tag="span" gap={4}>
                             {CORE_TEMPLATE_VARIABLES[templateId].map((variable) => (
-                              <Badge key={variable} tag="span">
+                              <SpanBadge key={variable} tag="span">
                                 {variable}
-                              </Badge>
+                              </SpanBadge>
                             ))}
                           </Flex>
                         )}
@@ -411,7 +430,7 @@ const EditTemplatePage = () => {
                           name="baseTemplate"
                           placeholder={getMessage('input.baseTemplate.placeholder')}
                           value={values.baseTemplate}
-                          onChange={(value: string) => {
+                          onChange={(value: string | number) => {
                             handleChange({
                               target: {
                                 name: 'baseTemplate',
@@ -455,7 +474,7 @@ const EditTemplatePage = () => {
                           name="bodyHtml"
                           rows={20}
                           value={values.bodyHtml}
-                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                             handleInputChange(e);
                             handleGetHtmlPreview({
                               data: e.target.value,
@@ -506,9 +525,6 @@ const EditTemplatePage = () => {
                       >
                         <Field.Label>{getMessage('input.sampleData.label')}</Field.Label>
                         <JSONInput
-                          placeholder={getMessage('input.sampleData.placeholder')}
-                          name="sampleData"
-                          rows={20}
                           value={values.sampleData}
                           onChange={(value: string) => {
                             handleInputChange({
