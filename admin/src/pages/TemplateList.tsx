@@ -89,7 +89,7 @@ const TemplateList = () => {
   const fetchTemplates = async (): Promise<TEmailTemplate[]> => {
     const url = getFetchUrl(type);
 
-    const { data } = await get(url);
+    const { data } = await get<TEmailTemplate[]>(url);
 
     return data;
   };
@@ -170,7 +170,10 @@ const TemplateList = () => {
         />
 
         <Layouts.Content>
-          <Table colCount={emailTemplatesHeaders.length}>
+          <Table
+            colCount={emailTemplatesHeaders.length}
+            rowCount={(isEmpty ? 1 : (emailTemplates?.length ?? 0)) + 1}
+          >
             <Thead>
               <Tr>
                 {emailTemplatesHeaders.map((header) => (
@@ -191,7 +194,7 @@ const TemplateList = () => {
                     <EmptyStateLayout
                       content={getMessage('label.noTemplates')}
                       hasRadius
-                      shadow={false}
+                      shadow="none"
                       icon={<EmptyDocuments width="16rem" />}
                       action={
                         <Button
@@ -252,7 +255,7 @@ const TemplateList = () => {
         </Layouts.Content>
       </Layouts.Root>
 
-      <Dialog.Root open={showConfirmDelete} onOpenChange={handleShowConfirmDelete}>
+      <Dialog.Root open={showConfirmDelete} onOpenChange={() => handleShowConfirmDelete()}>
         <Dialog.Content>
           <ConfirmDialog onConfirm={handleConfirmDelete} variant={undefined} icon={undefined} />
         </Dialog.Content>

@@ -50,7 +50,7 @@ const CoreTemplateList = () => {
         />
 
         <Layouts.Content>
-          <Table colCount={tableHeaders.length}>
+          <Table colCount={tableHeaders.length} rowCount={(emailTemplates?.length ?? 0) + 1}>
             <Thead>
               <Tr>
                 {tableHeaders.map((header) => (

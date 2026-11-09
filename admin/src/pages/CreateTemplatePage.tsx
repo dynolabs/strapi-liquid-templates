@@ -51,8 +51,10 @@ const Iframe = styled.iframe`
   border: none;
 `;
 
+type TBaseTemplate = { id: number; referenceId: string; bodyHtml: string };
+
 const getBaseTemplate = (
-  baseTemplates: { id: number; referenceId: string; bodyHtml: string }[],
+  baseTemplates: TBaseTemplate[] | undefined,
   selectedBaseTemplate: number
 ) => {
   return baseTemplates?.find((baseTemplate) => baseTemplate.id === selectedBaseTemplate);
@@ -81,7 +83,7 @@ const CreateTemplatePage = () => {
   const isBaseTemplate = type === 'base';
 
   const fetchBaseTemplates = async () => {
-    const { data } = await get(`${PLUGIN_ID}/base-templates`);
+    const { data } = await get<TBaseTemplate[]>(`${PLUGIN_ID}/base-templates`);
 
     return data;
   };
@@ -117,7 +119,7 @@ const CreateTemplatePage = () => {
     sampleData: string;
     baseTemplate: { bodyHtml: string; referenceId: string };
   }) => {
-    return post(`${PLUGIN_ID}/html`, {
+    return post<{ html: string }>(`${PLUGIN_ID}/html`, {
       template: data,
       sampleData,
       baseTemplate: baseTemplate,
@@ -203,7 +205,9 @@ const CreateTemplatePage = () => {
           const baseTemplate = getBaseTemplate(baseTemplates, values.baseTemplate);
 
           // Avoid a race condition to allow each field to be validated on change
-          const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+          const handleInputChange = async (
+            e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+          ) => {
             handleChange(e);
             validateField(e.target.name);
           };
@@ -296,7 +300,7 @@ const CreateTemplatePage = () => {
                           name="baseTemplate"
                           placeholder={getMessage('input.baseTemplate.placeholder')}
                           value={values.baseTemplate}
-                          onChange={(value: string) => {
+                          onChange={(value: string | number) => {
                             handleChange({
                               target: {
                                 name: 'baseTemplate',
@@ -340,7 +344,7 @@ const CreateTemplatePage = () => {
                           name="bodyHtml"
                           rows={20}
                           value={values.bodyHtml}
-                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                             handleInputChange(e);
                             handleGetHtmlPreview({
                               data: e.target.value,
@@ -355,7 +359,7 @@ const CreateTemplatePage = () => {
                     </Flex>
 
                     <Flex flex="1" alignItems="stretch" direction="column">
-                      <Field.Root flex="1" hint={getMessage('input.preview.hint')} readOnly>
+                      <Field.Root flex="1" hint={getMessage('input.preview.hint')}>
                         <Field.Label>{getMessage('input.preview.label')}</Field.Label>
 
                         <Box
@@ -392,9 +396,6 @@ const CreateTemplatePage = () => {
                       >
                         <Field.Label>{getMessage('input.sampleData.label')}</Field.Label>
                         <JSONInput
-                          placeholder={getMessage('input.sampleData.placeholder')}
-                          name="sampleData"
-                          rows={20}
                           value={values.sampleData}
                           onChange={(value: string) => {
                             handleInputChange({
